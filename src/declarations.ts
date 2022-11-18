@@ -1,14 +1,17 @@
 import { HookContext as FeathersHookContext, NextFunction } from '@feathersjs/feathers'
 import { Application as FeathersApplication } from '@feathersjs/koa'
-import { ConfigurationSchema } from './configuration'
+import { ApplicationConfiguration } from './schemas/configuration'
 
-import { UsersResult } from './services/users/users.schema'
+import { User } from './services/users/users'
 
 export { NextFunction }
 
-export interface Configuration extends ConfigurationSchema {}
+// The types for app.get(name) and app.set(name)
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Configuration extends ApplicationConfiguration {}
 
 // A mapping of service names to types. Will be extended in service files.
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ServiceTypes {}
 
 // The application instance type that will be used everywhere else
@@ -20,6 +23,6 @@ export type HookContext<S = any> = FeathersHookContext<Application, S>
 // Add the user as an optional property to all params
 declare module '@feathersjs/feathers' {
   interface Params {
-    user?: UsersResult
+    user?: User
   }
 }

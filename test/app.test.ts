@@ -26,7 +26,7 @@ describe('Feathers application tests', () => {
   it('shows a 404 JSON error', async () => {
     try {
       await axios.get(`${appUrl}/path/to/nowhere`, {
-        responseType: 'json'
+        responseType: 'json',
       })
       assert.fail('should never get here')
     } catch (error: any) {

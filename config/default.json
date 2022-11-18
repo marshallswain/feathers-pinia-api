@@ -9,11 +9,11 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://localhost:27017/feathers-pinia-nuxt3-api",
+  "mongodb": "mongodb://127.0.0.1:27017/feathers-pinia-nuxt3-api",
   "authentication": {
     "entity": "user",
     "service": "users",
-    "secret": "3rcvVIjGisokxg5SSG9KOhb22hxVnmUX",
+    "secret": "bFU/bmyaxZnpQghzfjZ+7ML1drgBDQhM",
     "authStrategies": [
       "jwt",
       "local"

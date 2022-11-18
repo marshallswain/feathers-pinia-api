@@ -6,14 +6,20 @@ export const logger = createLogger({
   // To see more detailed errors, change this to 'debug'
   level: 'info',
   format: format.combine(format.splat(), format.simple()),
-  transports: [new transports.Console()]
+  transports: [new transports.Console()],
 })
 
 export const logErrorHook = async (context: HookContext, next: NextFunction) => {
   try {
     await next()
-  } catch (error) {
-    logger.error(error)
+  } catch (error: any) {
+    logger.error(error.stack)
+
+    // Log validation errors
+    if (error.data) {
+      logger.error(error.data)
+    }
+
     throw error
   }
 }
