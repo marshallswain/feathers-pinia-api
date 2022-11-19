@@ -1,6 +1,9 @@
 import { feathers } from '@feathersjs/feathers'
 import type { TransportConnection, Params } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
+import type { Tasks, TasksData, TasksQuery, TasksService } from './services/tasks/tasks'
+export type { Tasks, TasksData, TasksQuery }
+
 import type { Contacts, ContactsData, ContactsQuery, ContactsService } from './services/contacts/contacts'
 export type { Contacts, ContactsData, ContactsQuery }
 
@@ -20,7 +23,11 @@ type ContactsClientService = Pick<
   typeof contactsServiceMethods[number]
 >
 
+const tasksServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove'] as const
+type TasksClientService = Pick<TasksService<Params<TasksQuery>>, typeof tasksServiceMethods[number]>
+
 export interface ServiceTypes {
+  tasks: TasksClientService
   contacts: ContactsClientService
   authentication: Pick<AuthenticationService, 'create' | 'remove'>
   users: UserClientService
@@ -49,6 +56,9 @@ export const createClient = <Configuration = any>(
   })
   client.use('contacts', connection.service('contacts'), {
     methods: contactsServiceMethods,
+  })
+  client.use('tasks', connection.service('tasks'), {
+    methods: tasksServiceMethods,
   })
   return client
 }
