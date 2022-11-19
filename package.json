@@ -35,7 +35,8 @@
     "start": "node lib/",
     "prettier": "npx prettier \"**/*.ts\" --write",
     "mocha": "cross-env NODE_ENV=test mocha test/ --require ts-node/register --recursive --extension .ts --exit",
-    "test": "npm run mocha"
+    "test": "npm run mocha",
+    "install": "npm run compile"
   },
   "dependencies": {
     "@feathersjs/authentication": "^5.0.0-pre.33",
