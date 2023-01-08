@@ -1,4 +1,4 @@
-# feathers-pinia-nuxt3-api
+# feathers-pinia-api
 
 > 
 
@@ -12,7 +12,7 @@ This project uses [Feathers](http://feathersjs.com). An open source framework fo
 2. Install your dependencies
 
     ```
-    cd path/to/feathers-pinia-nuxt3-api
+    cd path/to/feathers-pinia-api
     npm install
     ```
  
@@ -42,7 +42,13 @@ This project uses [Feathers](http://feathersjs.com). An open source framework fo
       ./mongod
       ```
 
-4. Start your app
+4. Build the client files for [feathers-pinia-nuxt3](https://github.com/marshallswain/feathers-pinia-nuxt3) and [feathers-pinia-vite](https://github.com/marshallswain/feathers-pinia-vite)
+
+   ```
+   npm run bundle:client
+   ```
+
+5. Start your app
 
     ```
     npm run compile # Compile TypeScript source
