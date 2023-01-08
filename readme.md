@@ -45,9 +45,16 @@ This project uses [Feathers](http://feathersjs.com). An open source framework fo
 4. Start your app
 
     ```
-    npm run compile # Compile TypeScript source
-    npm start
+    npm run dev
     ```
+
+5. Try creating a user:
+
+    ```
+    curl -X POST --header "Content-Type: application/json" --data '{"email":"andy@shawshank.prison","password":"xyz"}'  http://localhost:3030/users
+    ```
+    
+    Or download and install either [feathers-pinia-vite](https://github.com/marshallswain/feathers-pinia-vite) or [feathers-pinia-nuxt3](https://github.com/marshallswain/feathers-pinia-nuxt3) to get a full user experience.
 
 ## Testing
 
