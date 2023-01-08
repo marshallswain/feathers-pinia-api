@@ -15,8 +15,30 @@ This project uses [Feathers](http://feathersjs.com). An open source framework fo
     cd path/to/feathers-pinia-nuxt3-api
     npm install
     ```
+3. Set up MongoDB.
 
-3. Start your app
+    a. Download the community edition: https://www.mongodb.com/try/download/community
+    
+    b. Set up the data storage folder:
+    
+        Windows
+        ```
+        mkdir C:\data
+        mkdir C:\data\db
+        ```
+        
+        MacOS
+        ```
+        mkdir -p /data/db
+        sudo chown -R `id -un` /data/db
+        ```
+    c. Start MongoDB
+       
+        ```
+        ./mongod
+        ```
+
+4. Start your app
 
     ```
     npm run compile # Compile TypeScript source
