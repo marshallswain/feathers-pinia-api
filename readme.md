@@ -24,17 +24,17 @@ This project uses [Feathers](http://feathersjs.com). An open source framework fo
     
       Windows
         
-        ```
-        mkdir C:\data
-        mkdir C:\data\db
-        ```
+      ```
+      mkdir C:\data
+      mkdir C:\data\db
+      ```
         
       MacOS
         
-        ```
-        mkdir -p /data/db
-        sudo chown -R `id -un` /data/db
-        ```
+      ```
+      mkdir -p /data/db
+      sudo chown -R `id -un` /data/db
+      ```
         
     c. Start MongoDB
        
