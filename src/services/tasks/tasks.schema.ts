@@ -10,7 +10,8 @@ import { dataValidator, queryValidator } from '../../validators'
 export const tasksSchema = Type.Object(
   {
     _id: Type.String(),
-    text: Type.String(),
+    description: Type.String(),
+    isComplete: Type.Boolean(),
   },
   { $id: 'Tasks', additionalProperties: false },
 )
@@ -21,7 +22,7 @@ export const tasksResolver = resolve<Tasks, HookContext>({})
 export const tasksExternalResolver = resolve<Tasks, HookContext>({})
 
 // Schema for creating new entries
-export const tasksDataSchema = Type.Pick(tasksSchema, ['text'], {
+export const tasksDataSchema = Type.Pick(tasksSchema, ['description', 'isComplete'], {
   $id: 'TasksData',
 })
 export type TasksData = Static<typeof tasksDataSchema>
@@ -37,7 +38,7 @@ export const tasksPatchValidator = getValidator(tasksPatchSchema, dataValidator)
 export const tasksPatchResolver = resolve<Tasks, HookContext>({})
 
 // Schema for allowed query properties
-export const tasksQueryProperties = Type.Pick(tasksSchema, ['_id', 'text'])
+export const tasksQueryProperties = Type.Pick(tasksSchema, ['_id', 'description', 'isComplete'])
 export const tasksQuerySchema = Type.Intersect(
   [
     querySyntax(tasksQueryProperties),

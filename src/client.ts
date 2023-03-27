@@ -4,6 +4,14 @@ import type { TransportConnection, Application } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
 import type { AuthenticationClientOptions } from '@feathersjs/authentication-client'
 
+import { contactsClient } from './services/contacts/contacts.shared'
+export type {
+  Contacts,
+  ContactsData,
+  ContactsQuery,
+  ContactsPatch,
+} from './services/contacts/contacts.shared'
+
 import { tasksClient } from './services/tasks/tasks.shared'
 export type { Tasks, TasksData, TasksQuery, TasksPatch } from './services/tasks/tasks.shared'
 
@@ -38,5 +46,6 @@ export const createClient = <Configuration = any>(
 
   client.configure(usersClient)
   client.configure(tasksClient)
+  client.configure(contactsClient)
   return client
 }
