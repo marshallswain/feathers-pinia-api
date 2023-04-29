@@ -16,7 +16,11 @@ export class UsersService<ServiceParams extends Params = UsersParams> extends Mo
   UsersData,
   ServiceParams,
   UsersPatch
-> {}
+> {
+  async customCreate(data: UsersData, params?: ServiceParams): Promise<Users> {
+    return super.create(data, params)
+  }
+}
 
 export const getOptions = (app: Application): MongoDBAdapterOptions => {
   return {

@@ -9,7 +9,7 @@ export type UsersClientService = Pick<UsersService<Params<UsersQuery>>, (typeof 
 
 export const usersPath = 'users'
 
-export const usersMethods = ['find', 'get', 'create', 'patch', 'remove'] as const
+export const usersMethods = ['find', 'get', 'create', 'patch', 'remove', 'customCreate'] as const
 
 export const usersClient = (client: ClientApplication) => {
   const connection = client.get('connection')
