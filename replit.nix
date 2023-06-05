@@ -7,6 +7,7 @@
     nodePackages.typescript
     nodePackages.typescript-language-server
 
+    nodePackages.nodemon
     mongodb
   ];
 }
