@@ -31,12 +31,11 @@
   "main": "lib/client",
   "scripts": {
     "dev": "nodemon -x ts-node-transpile-only src/index.ts",
-    "compile": "shx rm -rf lib/ && tsc",
+    "compile": "shx rm -rf lib/ && tsc --transpileOnly",
     "start": "node lib/",
     "prettier": "npx prettier \"**/*.ts\" --write",
     "mocha": "cross-env NODE_ENV=test mocha test/ --require ts-node/register --recursive --extension .ts --exit",
-    "test": "npm run mocha",
-    "install": "npm run compile"
+    "test": "tsc --noEmit && npm run mocha"
   },
   "dependencies": {
     "@feathersjs/authentication": "^5.0.0-pre.34",
@@ -52,7 +51,7 @@
     "@feathersjs/socketio": "^5.0.0-pre.34",
     "@feathersjs/transport-commons": "^5.0.0-pre.34",
     "@feathersjs/typebox": "^5.0.0-pre.34",
-    "mongodb": "^4.13.0",
+    "mongodb": "~4.1.0",
     "winston": "^3.8.2",
     "shx": "^0.3.4",
     "typescript": "^4.9.4"
