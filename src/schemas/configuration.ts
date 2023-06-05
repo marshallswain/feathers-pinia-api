@@ -9,6 +9,7 @@ export const configurationSchema = Type.Intersect([
     host: Type.String(),
     port: Type.Number(),
     public: Type.String(),
+    origins: Type.Array(Type.String())
   }),
 ])
 

@@ -30,7 +30,7 @@
   },
   "main": "lib/client",
   "scripts": {
-    "dev": "nodemon -x ts-node src/index.ts",
+    "dev": "nodemon -x ts-node-transpile-only src/index.ts",
     "compile": "shx rm -rf lib/ && tsc",
     "start": "node lib/",
     "prettier": "npx prettier \"**/*.ts\" --write",
@@ -68,5 +68,10 @@
     "nodemon": "^2.0.20",
     "prettier": "^2.8.1",
     "ts-node": "^10.9.1"
+  },
+  "overrides": {
+    "@feathersjs/mongodb": {
+      "mongodb": "$mongodb"
+    }
   }
 }

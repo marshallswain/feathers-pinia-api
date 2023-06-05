@@ -119,3 +119,5 @@ dist
 .sqlite
 
 lib/
+
+package-lock.json

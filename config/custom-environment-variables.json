@@ -4,6 +4,10 @@
     "__format": "number"
   },
   "host": "HOSTNAME",
+  "origins": {
+    "__name": "FEATHERS_ORIGINS",
+    "__format": "json"
+  },
   "authentication": {
     "secret": "FEATHERS_SECRET"
   }
