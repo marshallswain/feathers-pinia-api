@@ -2,7 +2,7 @@ run = "npm run dev"
 hidden = [".build", ".config"]
 
 compile="""
-  npm i
+  ls node_modules &> /dev/null || npm i
   mongod --dbpath=/tmp > /dev/null 2>&1 &
 
   # Fix MongoDB on Replit 22.11 (Remove in 23.05)
