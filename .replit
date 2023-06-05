@@ -1,0 +1,47 @@
+run = "npm run dev"
+hidden = [".build", ".config"]
+
+compile="""
+  mongod --dbpath=/tmp > /dev/null 2>&1 &
+
+  # Fix MongoDB on Replit 22.11 (Remove in 23.05)
+  PKG_FILE="./package.json"
+  if ! grep -q "\\"mongodb\\": \\"~4.1.0\\"," "$PKG_FILE"; then
+    sed  -i "s/\\"mongodb\\": \\"\\^.*/\\"mongodb\\": \\"~4.1.0\\",/g" "$PKG_FILE"
+  fi
+"""
+
+[env]
+PATH = "/home/runner/$REPL_SLUG/.config/npm/node_global/bin:/home/runner/$REPL_SLUG/node_modules/.bin:/home/runner/$REPL_SLUG/node_modules/.bin"
+npm_config_prefix = "/home/runner/$REPL_SLUG/.config/npm/node_global" # globals support
+HOSTNAME = "$REPL_SLUG.$REPL_OWNER.repl.co"
+FEATHERS_ORIGINS = "[\"https://$REPL_SLUG.$REPL_OWNER.repl.co\"]"
+
+[[ports]]
+localPort=3030
+externalPort=80
+
+[packager]
+language = "nodejs"
+
+[packager.features]
+enabledForHosting = false
+packageSearch = true
+guessImports = true
+
+[nix]
+channel = "stable-22_11"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", ".config"]
+
+[languages]
+
+[languages.typescript]
+pattern = "**/{*.ts,*.js,*.tsx,*.jsx}"
+
+[languages.typescript.languageServer]
+start = "typescript-language-server --stdio"
+
+[deployment]
+run = ["sh", "-c", "npm run dev"]
