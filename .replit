@@ -2,6 +2,13 @@ run = "npm run dev"
 hidden = [".build", ".config"]
 
 compile="""
+  clear
+  if ! command -v mongod &> /dev/null ; then
+      echo "Please restart with kill 1"
+      echo "mongod could not be found."
+      echo "This is normal the first run after importing from github. Otherwise check replit.nix for the mongodb package."
+      exit
+  fi
   ls node_modules &> /dev/null || npm i
   mongod --dbpath=/tmp > /dev/null 2>&1 &
 

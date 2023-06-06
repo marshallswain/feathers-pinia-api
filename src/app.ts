@@ -4,7 +4,7 @@ import { koa, rest, bodyParser, errorHandler, parseAuthentication, cors, serveSt
 import socketio from '@feathersjs/socketio'
 
 import type { Application } from './declarations'
-import { configurationValidator } from './schemas/configuration'
+import { configurationValidator } from './configuration'
 import { logErrorHook } from './logger'
 import { mongodb } from './mongodb'
 import { authentication } from './authentication'
@@ -18,7 +18,7 @@ app.configure(configuration(configurationValidator))
 
 // Set up Koa middleware
 app.use(cors())
-app.use(serveStatic(app.get('public')))
+  ; (app.use as any)(serveStatic(app.get('public'))) // https://github.com/feathersjs/feathers/pull/3205
 app.use(errorHandler())
 app.use(parseAuthentication())
 app.use(bodyParser())

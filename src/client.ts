@@ -1,41 +1,33 @@
+// For more information about this file see https://dove.feathersjs.com/guides/cli/client.html
 import { feathers } from '@feathersjs/feathers'
-import type { TransportConnection, Params } from '@feathersjs/feathers'
+import type { TransportConnection, Application } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
-import type { Tasks, TasksData, TasksQuery, TasksService } from './services/tasks/tasks'
-export type { Tasks, TasksData, TasksQuery }
-
-import type { Contacts, ContactsData, ContactsQuery, ContactsService } from './services/contacts/contacts'
-export type { Contacts, ContactsData, ContactsQuery }
-
-import type { AuthenticationService } from '@feathersjs/authentication'
-
-import type { User, UserData, UserQuery, UserService } from './services/users/users'
-export type { User, UserData, UserQuery }
-
 import type { AuthenticationClientOptions } from '@feathersjs/authentication-client'
 
-const userServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove'] as const
-type UserClientService = Pick<UserService<Params<UserQuery>>, typeof userServiceMethods[number]>
+import { userClient } from './services/users/users.shared'
+export type { User, UserData, UserQuery, UserPatch } from './services/users/users.shared'
 
-const contactsServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove'] as const
-type ContactsClientService = Pick<
-  ContactsService<Params<ContactsQuery>>,
-  typeof contactsServiceMethods[number]
->
+import { contactsClient } from './services/contacts/contacts.shared'
+export type {
+  Contacts,
+  ContactsData,
+  ContactsQuery,
+  ContactsPatch
+} from './services/contacts/contacts.shared'
 
-const tasksServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove'] as const
-type TasksClientService = Pick<TasksService<Params<TasksQuery>>, typeof tasksServiceMethods[number]>
+import { tasksClient } from './services/tasks/tasks.shared'
+export type { Tasks, TasksData, TasksQuery, TasksPatch } from './services/tasks/tasks.shared'
 
-export interface ServiceTypes {
-  tasks: TasksClientService
-  contacts: ContactsClientService
-  authentication: Pick<AuthenticationService, 'create' | 'remove'>
-  users: UserClientService
-  //
+export interface Configuration {
+  connection: TransportConnection<ServiceTypes>
 }
 
+export interface ServiceTypes {}
+
+export type ClientApplication = Application<ServiceTypes, Configuration>
+
 /**
- * Returns a typed client for the feathers-pinia-nuxt3-api app.
+ * Returns a typed client for the feathers-mongo-server app.
  *
  * @param connection The REST or Socket.io Feathers client connection
  * @param authenticationOptions Additional settings for the authentication client
@@ -44,21 +36,17 @@ export interface ServiceTypes {
  */
 export const createClient = <Configuration = any>(
   connection: TransportConnection<ServiceTypes>,
-  authenticationOptions: Partial<AuthenticationClientOptions> = {},
+  authenticationOptions: Partial<AuthenticationClientOptions> = {}
 ) => {
-  const client = feathers<ServiceTypes, Configuration>()
+  const client: ClientApplication = feathers()
 
   client.configure(connection)
   client.configure(authenticationClient(authenticationOptions))
+  client.set('connection', connection)
 
-  client.use('users', connection.service('users'), {
-    methods: userServiceMethods,
-  })
-  client.use('contacts', connection.service('contacts'), {
-    methods: contactsServiceMethods,
-  })
-  client.use('tasks', connection.service('tasks'), {
-    methods: tasksServiceMethods,
-  })
+  client.configure(userClient)
+  client.configure(tasksClient)
+  client.configure(contactsClient)
+  client.configure(userClient)
   return client
 }

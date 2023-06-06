@@ -1,3 +1,4 @@
+// For more information about this file see https://dove.feathersjs.com/guides/cli/client.test.html
 import assert from 'assert'
 import axios from 'axios'
 
@@ -8,7 +9,7 @@ import { createClient } from '../src/client'
 import type { UserData } from '../src/client'
 
 const port = app.get('port')
-const appUrl = `http://${app.get('host')}:${port}`
+const appUrl = `http://localhost:${port}`
 
 describe('application client tests', () => {
   const client = createClient(rest(appUrl).axios(axios))
@@ -28,14 +29,14 @@ describe('application client tests', () => {
   it('creates and authenticates a user with email and password', async () => {
     const userData: UserData = {
       email: 'someone@example.com',
-      password: 'supersecret',
+      password: 'supersecret'
     }
 
     await client.service('users').create(userData)
 
     const { user, accessToken } = await client.authenticate({
       strategy: 'local',
-      ...userData,
+      ...userData
     })
 
     assert.ok(accessToken, 'Created access token for user')
