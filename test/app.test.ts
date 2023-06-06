@@ -4,7 +4,7 @@ import type { Server } from 'http'
 import { app } from '../src/app'
 
 const port = app.get('port')
-const appUrl = `http://${app.get('host')}:${port}`
+const appUrl = `http://localhost:${port}`
 
 describe('Feathers application tests', () => {
   let server: Server

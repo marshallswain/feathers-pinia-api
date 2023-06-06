@@ -1,9 +1,12 @@
+// For more information about this file see https://dove.feathersjs.com/guides/cli/service.class.html#database-services
 import type { Params } from '@feathersjs/feathers'
 import { MongoDBService } from '@feathersjs/mongodb'
 import type { MongoDBAdapterParams, MongoDBAdapterOptions } from '@feathersjs/mongodb'
 
 import type { Application } from '../../declarations'
-import type { Tasks, TasksData, TasksQuery } from './tasks.schema'
+import type { Tasks, TasksData, TasksPatch, TasksQuery } from './tasks.schema'
+
+export type { Tasks, TasksData, TasksPatch, TasksQuery }
 
 export interface TasksParams extends MongoDBAdapterParams<TasksQuery> {}
 
@@ -11,12 +14,13 @@ export interface TasksParams extends MongoDBAdapterParams<TasksQuery> {}
 export class TasksService<ServiceParams extends Params = TasksParams> extends MongoDBService<
   Tasks,
   TasksData,
-  ServiceParams
+  TasksParams,
+  TasksPatch
 > {}
 
 export const getOptions = (app: Application): MongoDBAdapterOptions => {
   return {
     paginate: app.get('paginate'),
-    Model: app.get('mongodbClient').then((db) => db.collection('tasks')),
+    Model: app.get('mongodbClient').then((db) => db.collection('tasks'))
   }
 }

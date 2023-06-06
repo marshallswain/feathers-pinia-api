@@ -1,9 +1,12 @@
+// For more information about this file see https://dove.feathersjs.com/guides/cli/service.class.html#database-services
 import type { Params } from '@feathersjs/feathers'
 import { MongoDBService } from '@feathersjs/mongodb'
 import type { MongoDBAdapterParams, MongoDBAdapterOptions } from '@feathersjs/mongodb'
 
 import type { Application } from '../../declarations'
-import type { Contacts, ContactsData, ContactsQuery } from './contacts.schema'
+import type { Contacts, ContactsData, ContactsPatch, ContactsQuery } from './contacts.schema'
+
+export type { Contacts, ContactsData, ContactsPatch, ContactsQuery }
 
 export interface ContactsParams extends MongoDBAdapterParams<ContactsQuery> {}
 
@@ -11,12 +14,13 @@ export interface ContactsParams extends MongoDBAdapterParams<ContactsQuery> {}
 export class ContactsService<ServiceParams extends Params = ContactsParams> extends MongoDBService<
   Contacts,
   ContactsData,
-  ServiceParams
+  ContactsParams,
+  ContactsPatch
 > {}
 
 export const getOptions = (app: Application): MongoDBAdapterOptions => {
   return {
     paginate: app.get('paginate'),
-    Model: app.get('mongodbClient').then((db) => db.collection('contacts')),
+    Model: app.get('mongodbClient').then((db) => db.collection('contacts'))
   }
 }
