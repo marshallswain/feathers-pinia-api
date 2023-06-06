@@ -30,7 +30,7 @@ externalPort=80
 regex = "Feathers app listening on https"
 message = """
 
-Try https://pr.new/github.com/marshallswain/feathers-pinia
+Try https://pr.new/github.com/marshallswain/feathers-pinia-vite
 """
 
 [packager]
