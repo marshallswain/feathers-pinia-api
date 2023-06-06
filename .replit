@@ -5,7 +5,7 @@ npm run dev
 
 compile="""
   clear
-  ls node_modules &> /dev/null || npm i
+  ls lib &> /dev/null || (npm run "bundle:client")
 
   # Fix MongoDB on Replit 22.11 (Remove in 23.05)
   PKG_FILE="./package.json"
