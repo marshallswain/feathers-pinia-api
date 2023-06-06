@@ -26,6 +26,13 @@ FEATHERS_ORIGINS = "[\"https://$REPL_SLUG.$REPL_OWNER.repl.co\"]"
 localPort=3030
 externalPort=80
 
+[[hints]]
+regex = "Feathers app listening on https"
+message = """
+
+Try https://pr.new/github.com/marshallswain/feathers-pinia
+"""
+
 [packager]
 language = "nodejs"
 
