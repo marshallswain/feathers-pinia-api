@@ -31,7 +31,7 @@
   "main": "lib/client",
   "scripts": {
     "dev": "nodemon -x ts-node-transpile-only src/index.ts",
-    "compile": "shx rm -rf lib/ && tsc",
+    "compile": "shx rm -rf lib/ && tsc && npm run bundle:client",
     "start": "node lib/",
     "prettier": "npx prettier \"**/*.ts\" --write",
     "mocha": "cross-env NODE_ENV=test mocha test/ --require ts-node/register --recursive --extension .ts --exit",
