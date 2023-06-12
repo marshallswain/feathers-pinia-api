@@ -20,9 +20,6 @@ concurrency:
   group: 'pages'
   cancel-in-progress: true
 
-env:
-  VITE_BASE: ${{github.event.repository.name}}/
-
 jobs:
   # Single deploy job since we're just deploying
   deploy:
@@ -45,7 +42,7 @@ jobs:
       - name: Install dependencies
         run: npm i -g @antfu/ni only-allow && ni
       - name: Build Client Bundle
-        run: nr build:client
+        run: nr bundle:client
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
