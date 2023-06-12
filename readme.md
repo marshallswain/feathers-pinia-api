@@ -23,7 +23,7 @@
 ## About
 
 This is the example [Feathers](http://feathersjs.com) backend server for most Feathers-Pinia examples used in the documentation.
-It is setup to provide a client bundle of typescript for use on your client.
+It is setup to provide a [client bundle of typescript for use on your client](https://marshallswain.github.io/feathers-pinia-api/feathers-pinia-api-0.0.0.tgz).
 
 - 🕊 Feathers is an open source framework for building APIs and real-time applications.
 - 🍍 Pinia is an App state management framework by Vue
