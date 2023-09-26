@@ -5,9 +5,10 @@ npm run dev
 
 compile="""
   clear
-  ls lib &> /dev/null || (npm run "bundle:client")
+  ls lib &> /dev/null || npm i && npm run "bundle:client"
 
-  # Fix MongoDB on Replit 22.11 (Remove in 23.05)
+  # Fix MongoDB on Replit 22.11
+  # A regression on 23.05 means we can't remove this yet https://ask.replit.com/t/replit-bootloop-on-23-05-with-mongodb/67788
   PKG_FILE="./package.json"
   if ! grep -q "\\"mongodb\\": \\"~4.1.0\\"," "$PKG_FILE"; then
     sed  -i "s/\\"mongodb\\": \\"\\^.*/\\"mongodb\\": \\"~4.1.0\\",/g" "$PKG_FILE"
